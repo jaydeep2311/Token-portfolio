@@ -1,0 +1,87 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Inter:var(--text-compact-txt-compact-small-font-weight),var(--headers-webs-h4-font-weight),var(--text-compact-txt-compact-medium-plus-font-weight),600,var(--text-compact-txt-compact-xsmall-font-weight),var(--text-compact-txt-compact-small-plus-font-weight),var(--headers-webs-h2-font-weight),var(--text-compact-txt-compact-large-plus-font-weight),500");
+:root {
+  --darkforegroundsfg-on-inverted: rgba(24, 24, 27, 1);
+  --darkforegroundsfg-subtle: rgba(161, 161, 170, 1);
+  --darktagstag-green-text: rgba(52, 211, 153, 1);
+  --darktagstag-purple-icon: rgba(167, 139, 250, 1);
+  --darktagstag-blue-icon: rgba(96, 165, 250, 1);
+  --darktagstag-green-icon: rgba(16, 185, 129, 1);
+  --darkbackgroundsbg-component: rgba(39, 39, 42, 1);
+  --darkforegroundsfg-base: rgba(244, 244, 245, 1);
+  --darkbackgroundsbg-base-hover: rgba(39, 39, 42, 1);
+  --darkbordersborder-base: rgba(255, 255, 255, 0.08);
+  --darkbackgroundsbg-base: rgba(33, 33, 36, 1);
+  --text-compact-txt-compact-medium-plus-font-family: "Inter", Helvetica;
+  --text-compact-txt-compact-medium-plus-font-weight: 500;
+  --text-compact-txt-compact-medium-plus-font-size: 14px;
+  --text-compact-txt-compact-medium-plus-letter-spacing: 0px;
+  --text-compact-txt-compact-medium-plus-line-height: 20px;
+  --text-compact-txt-compact-medium-plus-font-style: normal;
+  --text-compact-txt-compact-small-font-family: "Inter", Helvetica;
+  --text-compact-txt-compact-small-font-weight: 400;
+  --text-compact-txt-compact-small-font-size: 13px;
+  --text-compact-txt-compact-small-letter-spacing: 0px;
+  --text-compact-txt-compact-small-line-height: 20px;
+  --text-compact-txt-compact-small-font-style: normal;
+  --text-compact-txt-compact-xsmall-plus-font-family: "Inter", Helvetica;
+  --text-compact-txt-compact-xsmall-plus-font-weight: 500;
+  --text-compact-txt-compact-xsmall-plus-font-size: 12px;
+  --text-compact-txt-compact-xsmall-plus-letter-spacing: 0px;
+  --text-compact-txt-compact-xsmall-plus-line-height: 20px;
+  --text-compact-txt-compact-xsmall-plus-font-style: normal;
+  --text-compact-txt-compact-small-plus-font-family: "Inter", Helvetica;
+  --text-compact-txt-compact-small-plus-font-weight: 500;
+  --text-compact-txt-compact-small-plus-font-size: 13px;
+  --text-compact-txt-compact-small-plus-letter-spacing: 0px;
+  --text-compact-txt-compact-small-plus-line-height: 20px;
+  --text-compact-txt-compact-small-plus-font-style: normal;
+  --text-compact-txt-compact-large-plus-font-family: "Inter", Helvetica;
+  --text-compact-txt-compact-large-plus-font-weight: 500;
+  --text-compact-txt-compact-large-plus-font-size: 16px;
+  --text-compact-txt-compact-large-plus-letter-spacing: 0px;
+  --text-compact-txt-compact-large-plus-line-height: 20px;
+  --text-compact-txt-compact-large-plus-font-style: normal;
+  --headers-webs-h2-font-family: "Inter", Helvetica;
+  --headers-webs-h2-font-weight: 500;
+  --headers-webs-h2-font-size: 56px;
+  --headers-webs-h2-letter-spacing: -1.2544000053405762px;
+  --headers-webs-h2-line-height: 110%;
+  --headers-webs-h2-font-style: normal;
+  --text-compact-txt-compact-xsmall-font-family: "Inter", Helvetica;
+  --text-compact-txt-compact-xsmall-font-weight: 400;
+  --text-compact-txt-compact-xsmall-font-size: 12px;
+  --text-compact-txt-compact-xsmall-letter-spacing: 0px;
+  --text-compact-txt-compact-xsmall-line-height: 20px;
+  --text-compact-txt-compact-xsmall-font-style: normal;
+  --headers-webs-h4-font-family: "Inter", Helvetica;
+  --headers-webs-h4-font-weight: 500;
+  --headers-webs-h4-font-size: 24px;
+  --headers-webs-h4-letter-spacing: -0.23039999485015866px;
+  --headers-webs-h4-line-height: 125%;
+  --headers-webs-h4-font-style: normal;
+  --light-borders-base: 0px 0px 0px 1px rgba(0, 0, 0, 0.08),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+  --light-buttons-neutral: 0px 0px 0px 1px rgba(0, 0, 0, 0.08),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+  --light-buttons-inverted: 0px 0px 0px 1px rgba(24, 24, 27, 1),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
