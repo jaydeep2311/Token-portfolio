@@ -186,7 +186,7 @@
   .home-full-view .results,
   .home-full-view .pages {
     width: 100%;
-    justify-content: center;
+    justify-content: start;
   }
 
   .home-full-view .pages {
@@ -265,6 +265,10 @@
     gap: 18px;
     border-radius: 8px;
   }
+
+  .token-modal {
+    width: 420px !important;
+  }
 }
 
 /* Additional table responsiveness: stack cells into card rows on small screens */
@@ -341,6 +345,10 @@
   .table-footer {
     flex-direction: column;
     gap: 8px;
+  }
+
+  .token-modal {
+    width: 420px !important;
   }
 }
 
