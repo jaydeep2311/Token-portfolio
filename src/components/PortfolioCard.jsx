@@ -91,14 +91,26 @@ const PortfolioCard = () => {
             class="group"
             src="https://c.animaapp.com/mgrsx9ysK8BVCj/img/group.png"
           /> */}
-          <DonutChart
-            data={items.map((item) => {
-              return {
-                name: item.name,
-                value: item.holdings,
-              };
-            })}
-          />
+          {items && items.length ? (
+            <DonutChart
+              data={items.map((item) => {
+                return {
+                  name: item.name,
+                  value: item.holdings,
+                };
+              })}
+            />
+          ) : (
+            <div
+              style={{
+                textAlign: "center",
+                padding: 24,
+                color: "rgba(255,255,255,0.7)",
+              }}
+            >
+              No data found
+            </div>
+          )}
           <div
             style={{
               display: "flex",

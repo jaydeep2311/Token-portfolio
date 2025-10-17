@@ -247,183 +247,210 @@ const Table = () => {
           </div>
         </div>
         <div className="frame-13">
-          {items && items.length ? (
-            (() => {
-              const totalPages = Math.max(
-                1,
-                Math.ceil(items.length / itemsPerPage)
-              );
-              // ensure currentPage in range
-              const page = Math.min(Math.max(1, currentPage), totalPages);
-              const startIndex = (page - 1) * itemsPerPage;
-              const pageItems = items.slice(
-                startIndex,
-                startIndex + itemsPerPage
-              );
-              return pageItems.map((it) => {
-                const m = market[it.id] || {};
-                console.log({ it, m });
+          {items && items.length
+            ? (() => {
+                const totalPages = Math.max(
+                  1,
+                  Math.ceil(items.length / itemsPerPage)
+                );
+                // ensure currentPage in range
+                const page = Math.min(Math.max(1, currentPage), totalPages);
+                const startIndex = (page - 1) * itemsPerPage;
+                const pageItems = items.slice(
+                  startIndex,
+                  startIndex + itemsPerPage
+                );
+                return pageItems.map((it) => {
+                  const m = market[it.id] || {};
+                  console.log({ it, m });
 
-                const price = m.current_price ?? 0;
-                const change24 = m.price_change_percentage_24h ?? 0;
-                const holdings = Number(it.holdings || 0);
-                console.log({ holdings });
-                const value = holdings * price;
-                return (
-                  <div className="table-row" key={it.id} data-row={it.id}>
-                    <div className="frame-14">
-                      <div className="file-thumbnails-wrapper">
-                        <div className="file-thumbnails">
-                          {m && m.image ? (
-                            <img
-                              src={m.image}
-                              alt={it.symbol}
-                              style={{
-                                width: 28,
-                                height: 28,
-                                borderRadius: 14,
-                              }}
-                            />
-                          ) : null}
+                  const price = m.current_price ?? 0;
+                  const change24 = m.price_change_percentage_24h ?? 0;
+                  const holdings = Number(it.holdings || 0);
+                  console.log({ holdings });
+                  const value = holdings * price;
+                  return (
+                    <div className="table-row" key={it.id} data-row={it.id}>
+                      <div className="frame-14">
+                        <div className="file-thumbnails-wrapper">
+                          <div className="file-thumbnails">
+                            {m && m.image ? (
+                              <img
+                                src={m.image}
+                                alt={it.symbol}
+                                style={{
+                                  width: 28,
+                                  height: 28,
+                                  borderRadius: 14,
+                                }}
+                              />
+                            ) : null}
+                          </div>
+                        </div>
+                        <div className="table-cell-2">
+                          <p className="p">
+                            <span className="span">{it.name} </span>
+                            <span className="text-wrapper-14">
+                              ({it.symbol})
+                            </span>
+                          </p>
                         </div>
                       </div>
                       <div className="table-cell-2">
-                        <p className="p">
-                          <span className="span">{it.name} </span>
-                          <span className="text-wrapper-14">({it.symbol})</span>
-                        </p>
+                        <div className="label-5">
+                          ${price?.toLocaleString?.() ?? price}
+                        </div>
                       </div>
-                    </div>
-                    <div className="table-cell-2">
-                      <div className="label-5">
-                        ${price?.toLocaleString?.() ?? price}
+                      <div className="table-cell-2">
+                        <div className="label-5">
+                          {change24 ? `${change24.toFixed(2)}%` : "—"}
+                        </div>
                       </div>
-                    </div>
-                    <div className="table-cell-2">
-                      <div className="label-5">
-                        {change24 ? `${change24.toFixed(2)}%` : "—"}
-                      </div>
-                    </div>
-                    <div className="table-cell-3">
-                      {/* simple sparkline placeholder; you can render a small sparkline chart here using spark array */}
-                      {/* {spark ? (
+                      <div className="table-cell-3">
+                        {/* simple sparkline placeholder; you can render a small sparkline chart here using spark array */}
+                        {/* {spark ? (
                       <SparklineChart data={it.sparkline_in_7d.price} />
                     ) : null} */}
-                      <SparklineChart data={m?.sparkline_in_7d?.price} />
-                    </div>
-                    <div className="table-cell-2">
-                      <div
-                        className={
-                          editingRowId === it.id ? "three-select-input" : ""
-                        }
-                      >
-                        {editingRowId === it.id ? (
-                          <input
-                            name="holdings"
-                            type="number"
-                            className="text-wrapper-15"
-                            value={editValues[it.id] ?? it.holdings ?? ""}
-                            onChange={(e) =>
-                              setEditValues((prev) => ({
-                                ...prev,
-                                [it.id]: e.target.value,
-                              }))
-                            }
-                            step="any"
-                          />
-                        ) : (
-                          <div className="text-wrapper-15">{holdings}</div>
-                        )}
+                        <SparklineChart data={m?.sparkline_in_7d?.price} />
                       </div>
-                      {editingRowId === it.id ? (
-                        <div className="button-wrapper">
-                          <button
-                            className="button-4"
-                            onClick={() => {
-                              // save: only now update redux with the numeric value
-                              const val = editValues[it.id];
-                              const numeric =
-                                val === "" || val == null ? 0 : Number(val);
-                              dispatch(
-                                updateHoldings({ id: it.id, holdings: numeric })
-                              );
-                              setEditingRowId(null);
-                              setEditValues((prev) => {
-                                const next = { ...prev };
-                                delete next[it.id];
-                                return next;
+                      <div className="table-cell-2">
+                        <div
+                          className={
+                            editingRowId === it.id ? "three-select-input" : ""
+                          }
+                        >
+                          {editingRowId === it.id ? (
+                            <input
+                              name="holdings"
+                              type="number"
+                              className="text-wrapper-15"
+                              value={editValues[it.id] ?? it.holdings ?? ""}
+                              onChange={(e) =>
+                                setEditValues((prev) => ({
+                                  ...prev,
+                                  [it.id]: e.target.value,
+                                }))
+                              }
+                              step="any"
+                            />
+                          ) : (
+                            <div className="text-wrapper-15">{holdings}</div>
+                          )}
+                        </div>
+                        {editingRowId === it.id ? (
+                          <div className="button-wrapper">
+                            <button
+                              className="button-4"
+                              onClick={() => {
+                                // save: only now update redux with the numeric value
+                                const val = editValues[it.id];
+                                const numeric =
+                                  val === "" || val == null ? 0 : Number(val);
+                                dispatch(
+                                  updateHoldings({
+                                    id: it.id,
+                                    holdings: numeric,
+                                  })
+                                );
+                                setEditingRowId(null);
+                                setEditValues((prev) => {
+                                  const next = { ...prev };
+                                  delete next[it.id];
+                                  return next;
+                                });
+                              }}
+                            >
+                              <div className="label">Save</div>
+                            </button>
+                          </div>
+                        ) : null}
+                      </div>
+                      <div className="table-cell-2">
+                        <div className="label-6">${value.toFixed(2)}</div>
+                      </div>
+                      <div className="icon-button-wrapper">
+                        <div className="icon-button">
+                          <img
+                            src={IconButton}
+                            alt="menu"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const rect =
+                                e.currentTarget.getBoundingClientRect();
+                              setOpenMenu({
+                                id: it.id,
+                                x: rect.left - 148,
+                                y: rect.top + 10,
                               });
                             }}
-                          >
-                            <div className="label">Save</div>
-                          </button>
-                        </div>
-                      ) : null}
-                    </div>
-                    <div className="table-cell-2">
-                      <div className="label-6">${value.toFixed(2)}</div>
-                    </div>
-                    <div className="icon-button-wrapper">
-                      <div className="icon-button">
-                        <img
-                          src={IconButton}
-                          alt="menu"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const rect =
-                              e.currentTarget.getBoundingClientRect();
-                            setOpenMenu({
-                              id: it.id,
-                              x: rect.left - 148,
-                              y: rect.top + 10,
-                            });
-                          }}
-                        />
-                      </div>
-                      {openMenu.id === it.id && (
-                        <div
-                          className="floating-menu"
-                          style={{
-                            position: "fixed",
-                            left: `${openMenu.x}px`,
-                            top: `${openMenu.y}px`,
-                            transform: "translate(0%, -110%)",
-                            zIndex: 9999,
-                          }}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Menu
-                            onEdit={() => {
-                              // enter edit mode for this row and prefill value
-                              setEditingRowId(it.id);
-                              setEditValues((prev) => ({
-                                ...prev,
-                                [it.id]: it.holdings ?? "",
-                              }));
-                              // small timeout so input exists in DOM then focus
-                              setTimeout(() => {
-                                const input = document.querySelector(
-                                  `[data-row="${it.id}"] input[name='holdings']`
-                                );
-                                if (input) input.focus();
-                              }, 0);
-                              setOpenMenu({ id: null, x: 0, y: 0 });
-                            }}
-                            onRemove={() => {
-                              dispatch(removeToken(it.id));
-                              setOpenMenu({ id: null, x: 0, y: 0 });
-                            }}
                           />
                         </div>
-                      )}
+                        {openMenu.id === it.id && (
+                          <div
+                            className="floating-menu"
+                            style={{
+                              position: "fixed",
+                              left: `${openMenu.x}px`,
+                              top: `${openMenu.y}px`,
+                              transform: "translate(0%, -110%)",
+                              zIndex: 9999,
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Menu
+                              onEdit={() => {
+                                // enter edit mode for this row and prefill value
+                                setEditingRowId(it.id);
+                                setEditValues((prev) => ({
+                                  ...prev,
+                                  [it.id]: it.holdings ?? "",
+                                }));
+                                // small timeout so input exists in DOM then focus
+                                setTimeout(() => {
+                                  const input = document.querySelector(
+                                    `[data-row="${it.id}"] input[name='holdings']`
+                                  );
+                                  if (input) input.focus();
+                                }, 0);
+                                setOpenMenu({ id: null, x: 0, y: 0 });
+                              }}
+                              onRemove={() => {
+                                dispatch(removeToken(it.id));
+                                setOpenMenu({ id: null, x: 0, y: 0 });
+                              }}
+                            />
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                );
-              });
-            })()
-          ) : (
-            <div>No tokens in watchlist. Add some.</div>
-          )}
+                  );
+                });
+              })()
+            : (() => {
+                // if nothing persisted in localStorage show a clear 'No data found' message
+                let persisted = null;
+                try {
+                  persisted = localStorage.getItem("portfolio_watchlist_v1");
+                } catch (err) {
+                  console.warn("Failed reading persisted watchlist", err);
+                  persisted = null;
+                }
+                if (!persisted) {
+                  return (
+                    <div
+                      style={{
+                        width: "100%",
+                        padding: 40,
+                        textAlign: "center",
+                        color: "rgba(255,255,255,0.7)",
+                      }}
+                    >
+                      No data found
+                    </div>
+                  );
+                }
+                return <div>No tokens in watchlist. Add some.</div>;
+              })()}
         </div>
         <div class="table-footer">
           <div className="results">
