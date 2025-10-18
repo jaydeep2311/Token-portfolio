@@ -494,7 +494,7 @@
   padding: 12px 0px;
   position: relative;
   align-self: stretch;
-  width: 100%;
+  min-width: 900px;
   flex: 0 0 auto;
   margin-left: -1px;
   margin-right: -1px;
